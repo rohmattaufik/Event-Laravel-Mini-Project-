@@ -13,8 +13,8 @@ class LocationController extends Controller
         $rules = array(
             'location'  => 'required',
             'city'      => 'required',
-            'longitude' => 'required',
-            'latitude'  => 'required'
+            'longitude' => 'required | numeric',
+            'latitude'  => 'required | numeric'
         );
 
         $validator = Validator::make($request->all(), $rules);

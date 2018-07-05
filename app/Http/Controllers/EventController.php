@@ -7,6 +7,7 @@ use App\Event;
 use App\Location;
 use App\Ticket;
 use Validator;
+use DateTime;
 
 class EventController extends Controller
 {
@@ -41,11 +42,11 @@ class EventController extends Controller
         $rules = array(
             'name'          => 'required',
             'description'   => 'required',
-            'id_location'   => 'required',
-            'date_start'    => 'required',
-            'date_close'    => 'required',
-            'time_start'    => 'required',
-            'time_close'    => 'required',
+            'id_location'   => 'required | numeric',
+            'date_start'    => 'required | date_format:Y-m-d',
+            'date_close'    => 'required | date_format:Y-m-d',
+            'time_start'    => 'required | date_format:H:i:s',
+            'time_close'    => 'required | date_format:H:i:s',
             'image'         => 'required | mimes:jpeg,jpg,png'
         );
 
@@ -55,6 +56,15 @@ class EventController extends Controller
             return response()->json([
                 'status'    => 'error',
                 'message'   => 'Your data not complete or false'
+            ],500);
+        }
+
+        $startTime = new DateTime($request->date_start ." ". $request->time_start);
+        $closeTime = new DateTime($request->date_close ." ". $request->time_close);
+        if($closeTime <= $startTime){
+            return response()->json([
+                'status'    => 'error',
+                'message'   => 'Close Time must more than Start Time'
             ],500);
         }
 
@@ -95,8 +105,8 @@ class EventController extends Controller
             'id_event'      => 'required',
             'name'          => 'required',
             'detail'        => 'required',
-            'quantity'      => 'required',
-            'price'         => 'required',
+            'quantity'      => 'required | numeric',
+            'price'         => 'required | numeric',
         );
 
         $validator = Validator::make($request->all(), $rules);

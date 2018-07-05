@@ -16,8 +16,8 @@ class TransactionController extends Controller
     public function purchase(Request $request){
         
         $rules = array(
-            'id_user'       => 'required',
-            'id_event'      => 'required',
+            'id_user'       => 'required | numeric',
+            'id_event'      => 'required | numeric',
             'tickets'       => 'required',
         );
 

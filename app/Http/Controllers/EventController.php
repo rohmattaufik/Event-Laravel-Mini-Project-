@@ -102,7 +102,7 @@ class EventController extends Controller
 
     public function create_ticket(Request $request){
         $rules = array(
-            'id_event'      => 'required',
+            'id_event'      => 'required | numeric',
             'name'          => 'required',
             'detail'        => 'required',
             'quantity'      => 'required | numeric',

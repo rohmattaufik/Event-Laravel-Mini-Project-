@@ -28,3 +28,7 @@ Route::post('event/ticket/create','EventController@create_ticket');
 Route::post('user/create','UserController@create_user');
 
 Route::post('transaction/purchase','TransactionController@purchase');
+
+Route::get('event/get_info/{id}','EventController@get_info');
+
+Route::get('location/{id}','LocationController@get_location');

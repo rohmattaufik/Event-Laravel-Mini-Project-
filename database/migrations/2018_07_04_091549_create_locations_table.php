@@ -17,7 +17,8 @@ class CreateLocationsTable extends Migration
             $table->increments('id');
             $table->text('location');
             $table->text('city');
-            $table->geometry('position');
+            $table->decimal('longitude');
+            $table->decimal('latitude');
             $table->timestamps();
         });
     }

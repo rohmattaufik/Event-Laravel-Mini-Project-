@@ -13,12 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::get('transaction/get_info/{id}','TransactionController@get_transaction');
 
 Route::post('location/create','LocationController@create_location');
 
 Route::post('event/create','EventController@create_event');
 
 Route::post('event/ticket/create','EventController@create_ticket');
+
+Route::post('user/create','UserController@create_user');
+
+Route::post('transaction/purchase','TransactionController@purchase');
